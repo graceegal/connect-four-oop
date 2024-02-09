@@ -11,6 +11,7 @@ class Game {
     this.height = height;
     this.currPlayer = 1;
     this.board = [];
+    this.finishedGame = false;
     this.makeHtmlBoard();
     this.makeBoard();
   }
@@ -83,13 +84,18 @@ class Game {
     piece.classList.add(`p${this.currPlayer}`);
 
     const spot = document.getElementById(`c-${y}-${x}`);
-    spot.append(piece);
+    if (!this.finishedGame) {
+      spot.append(piece);
+    }
   }
 
   /** endGame: announce game end */
 
   endGame(msg) {
-    alert(msg);
+    if (!this.finishedGame) {
+      alert(msg);
+      this.finishedGame = true;
+    }
   }
 
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -179,9 +185,6 @@ const this.board = [];  */// array of rows, each row is array of cells  (board[y
 // (board[5][0] would be the bottom-left spot on the board)
 
 
-
-new Game(6, 7);
-
 /** Start game. */
 
 /* function start() {
@@ -190,3 +193,16 @@ new Game(6, 7);
 }
 
 start(); */
+
+
+
+// PART 2 SMALL IMPROVEMENTS
+
+const startBtn = document.getElementById("start-btn");
+
+function newGame () {
+  new Game(6,7);
+}
+
+startBtn.addEventListener("click", newGame);
+
