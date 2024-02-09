@@ -1,0 +1,14 @@
+Part One: Make Game Into a Class
+
+1. create Game classList
+
+2. Create a constructor
+
+3. Initialize variables: WIDTH, HEIGHT,
+currentPlayer, board
+
+4. Add methos to Game class:
+ - Every function
+
+ 5. Go through each method and check the
+ variables so that they call our constructor
