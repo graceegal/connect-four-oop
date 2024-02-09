@@ -12,3 +12,12 @@ currentPlayer, board
 
  5. Go through each method and check the
  variables so that they call our constructor
+
+
+ Part 3
+
+ 1. Create Player Class
+ Add constructor: color name
+
+ 2. Update Game class where
+ Game Class player =

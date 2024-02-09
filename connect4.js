@@ -6,10 +6,12 @@ WIDTH, this.HEIGHT, currentPlayer, board
  */
 
 class Game {
-  constructor(height, width) {
+  constructor(playerOne, playerTwo, height, width) {
     this.width = width;
     this.height = height;
-    this.currPlayer = 1;
+    this.firstPlayer = playerOne;
+    this.secondPlayer = playerTwo;
+    this.currPlayer = this.firstPlayer;
     this.board = [];
     this.finishedGame = false;
     this.makeHtmlBoard();
@@ -81,7 +83,8 @@ class Game {
   placeInTable(y, x) {
     const piece = document.createElement('div');
     piece.classList.add('piece');
-    piece.classList.add(`p${this.currPlayer}`);
+    piece.style.backgroundColor = this.currPlayer.color;
+    /* piece.classList.add(`p${this.currPlayer}`); */
 
     const spot = document.getElementById(`c-${y}-${x}`);
     if (!this.finishedGame) {
@@ -164,44 +167,31 @@ class Game {
     }
 
     // switch players
-    this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+    this.currPlayer = this.currPlayer === this.firstPlayer ? this.secondPlayer : this.firstPlayer;
   }
 
 }
 
-
-/** Connect Four
- *
- * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
- * column until a player gets four-in-a-row (horiz, vert, or diag) or until
- * board fills (tie)
- */
-
-/* const this.WIDTH = 7;
-const this.HEIGHT = 6; */
-
-/* let this.currPlayer = 1; // active player: 1 or 2
-const this.board = [];  */// array of rows, each row is array of cells  (board[y][x])
-// (board[5][0] would be the bottom-left spot on the board)
-
-
-/** Start game. */
-
-/* function start() {
-  makeBoard();
-  makeHtmlBoard();
+/* Creates a new instance of a player
+Receives the value introduced by the user -> color */
+class Player {
+  constructor(playerColor) {
+    this.color = playerColor;
+  }
 }
-
-start(); */
-
-
 
 // PART 2 SMALL IMPROVEMENTS
 
-const startBtn = document.getElementById("start-btn");
+const startBtn = document.getElementById("start-game");
 
-function newGame () {
-  new Game(6,7);
+function newGame() {
+  let playerOneColor = document.getElementById('player1_input').value;
+  let playerTwoColor = document.getElementById('player2_input').value;
+
+  const firstPlayer = new Player(playerOneColor);
+  const secondPlayer = new Player(playerTwoColor);
+
+  new Game(firstPlayer, secondPlayer, 6, 7);
 }
 
 startBtn.addEventListener("click", newGame);
